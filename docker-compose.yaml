@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "5555:5000"
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql
+    environment:  
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=time
+    volumes:
+      - msql_data:/var/lib/msql
+  adminer: 
+    restart: always
+    image: adminer
+    ports:
+    - "8080:8080"
+volumes:
+  mysql_data:
